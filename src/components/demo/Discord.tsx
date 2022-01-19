@@ -1,7 +1,13 @@
 import { Avatar, Box, Flex, Text, Link, Image } from '@chakra-ui/react';
+import { Meta } from '../../lib/meta';
+import MetaImage from '../meta/MetaImage';
+import MetaLink from '../meta/MetaLink';
+import MetaText from '../meta/MetaText';
 import PreviewFrame from '../PreviewFrame';
 
-const Discord: React.FC = () => {
+const Discord: React.FC<{ meta: Meta }> = (props) => {
+	console.log(props.meta);
+
 	return (
 		<PreviewFrame title="Discord">
 			<Flex bg="#36393f" p={4} gap={3}>
@@ -27,14 +33,21 @@ const Discord: React.FC = () => {
 						borderLeftWidth={4}
 						borderColor="#202225"
 					>
-						<Link color="#01aff4" fontWeight="600" _hover={{ textDecor: 'underline' }}>
-							This is the title of the page
-						</Link>
-						<Text mt={2} color="#dcddde" fontSize="sm">
-							The text here, which is the description of the page, should describe
-							what the page is about when you click it.
-						</Text>
-						<Image mt={3} borderRadius={4} src="https://via.placeholder.com/800x450" />
+						<MetaLink
+							meta={props.meta}
+							tag="title"
+							color="#01aff4"
+							fontWeight="600"
+							_hover={{ textDecor: 'underline' }}
+						/>
+						<MetaText
+							meta={props.meta}
+							tag="description"
+							mt={2}
+							color="#dcddde"
+							fontSize="sm"
+						/>
+						<MetaImage meta={props.meta} mt={3} borderRadius={4} src="thumbnail" />
 					</Box>
 				</Box>
 			</Flex>
