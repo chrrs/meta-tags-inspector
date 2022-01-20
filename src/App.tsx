@@ -14,6 +14,7 @@ const App: React.FC = () => {
 							'og:image': 'https://via.placeholder.com/800x450',
 							'og:site_name': 'Site',
 							'theme-color': '#ff0000',
+							'twitter:card': 'summary_large_image',
 						},
 					}}
 				/>

@@ -1,4 +1,5 @@
 import { Avatar, Box, Flex, Text, Link, Icon } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { getTag, Meta } from '../../lib/meta';
 import MetaImage from '../meta/MetaImage';
 import MetaLink from '../meta/MetaLink';
@@ -6,7 +7,11 @@ import MetaText from '../meta/MetaText';
 import PreviewFrame from '../PreviewFrame';
 
 const Discord: React.FC<{ meta: Meta }> = (props) => {
-	console.log(props.meta);
+	const [largeImage, setLargeImage] = useState(false);
+
+	useEffect(() => {
+		setLargeImage(getTag(props.meta, 'twitter:card') === 'summary_large_image');
+	}, [props.meta]);
 
 	return (
 		<PreviewFrame
@@ -50,6 +55,18 @@ const Discord: React.FC<{ meta: Meta }> = (props) => {
 						borderLeftWidth={4}
 						borderColor={getTag(props.meta, 'theme-color') ?? '#202225'}
 					>
+						{!largeImage && (
+							<MetaImage
+								meta={props.meta}
+								borderRadius={4}
+								float="right"
+								maxWidth={24}
+								mb={2}
+								ml={2}
+								src="og:image"
+								alt="og:image:alt"
+							/>
+						)}
 						<MetaText
 							meta={props.meta}
 							tag="og:site_name"
@@ -71,8 +88,15 @@ const Discord: React.FC<{ meta: Meta }> = (props) => {
 							color="#dcddde"
 							fontSize="sm"
 						/>
-						<MetaImage meta={props.meta} mt={3} borderRadius={4} src="og:image" />
-						{/* TODO: This won't always be a big image, sometimes small and in the corner. */}
+						{largeImage && (
+							<MetaImage
+								meta={props.meta}
+								mt={3}
+								borderRadius={4}
+								src="og:image"
+								alt="og:image:alt"
+							/>
+						)}
 					</Box>
 				</Box>
 			</Flex>
