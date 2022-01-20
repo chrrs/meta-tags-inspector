@@ -9,10 +9,13 @@ const MetaImage: React.FC<
 	} & ImageProps
 > = (props) => {
 	const { meta, src, alt, ...rest } = props;
+	const realSrc = src ? getTag(meta, src) : undefined;
+
 	return (
 		<Image
 			{...rest}
-			src={src ? getTag(meta, src) : undefined}
+			hidden={realSrc === undefined}
+			src={realSrc}
 			alt={alt ? getTag(meta, alt) : undefined}
 		/>
 	);

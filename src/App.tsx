@@ -8,13 +8,9 @@ const App: React.FC = () => {
 				<Discord
 					meta={{
 						tags: {
-							title: 'This is the title of the page',
-							description:
-								'The text here, which is the description of the page, should describe what the page is about when you click it.',
+							title: 'title',
+							description: 'description',
 							'og:image': 'https://via.placeholder.com/800x450',
-							'og:site_name': 'Site',
-							'theme-color': '#ff0000',
-							'twitter:card': 'summary_large_image',
 						},
 					}}
 				/>

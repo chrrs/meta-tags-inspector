@@ -3,7 +3,13 @@ import { getTag, Meta } from '../../lib/meta';
 
 const MetaText: React.FC<{ meta: Meta; tag: string | string[] } & TextProps> = (props) => {
 	const { meta, tag, children, ...rest } = props;
-	return <Text {...rest}>{getTag(meta, tag)}</Text>;
+	const realTag = getTag(meta, tag);
+
+	return (
+		<Text {...rest} hidden={realTag === undefined}>
+			{realTag}
+		</Text>
+	);
 };
 
 export default MetaText;
