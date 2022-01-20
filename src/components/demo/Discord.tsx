@@ -50,7 +50,13 @@ const Discord: React.FC<{ meta: Meta }> = (props) => {
 						borderLeftWidth={4}
 						borderColor="#202225"
 					>
-						{/* TODO: Add site name here. */}
+						<MetaText
+							meta={props.meta}
+							tag="og:site_name"
+							color="#dcddde"
+							fontSize="xs"
+							mb={1}
+						/>
 						<MetaLink
 							meta={props.meta}
 							tag={['og:title', 'title']}
