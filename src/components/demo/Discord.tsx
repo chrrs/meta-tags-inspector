@@ -1,5 +1,5 @@
 import { Avatar, Box, Flex, Text, Link, Icon } from '@chakra-ui/react';
-import { Meta } from '../../lib/meta';
+import { getTag, Meta } from '../../lib/meta';
 import MetaImage from '../meta/MetaImage';
 import MetaLink from '../meta/MetaLink';
 import MetaText from '../meta/MetaText';
@@ -48,7 +48,7 @@ const Discord: React.FC<{ meta: Meta }> = (props) => {
 						bg="#2f3136"
 						borderRadius={4}
 						borderLeftWidth={4}
-						borderColor="#202225"
+						borderColor={getTag(props.meta, 'theme-color') ?? '#202225'}
 					>
 						<MetaText
 							meta={props.meta}

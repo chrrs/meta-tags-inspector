@@ -13,6 +13,7 @@ const App: React.FC = () => {
 								'The text here, which is the description of the page, should describe what the page is about when you click it.',
 							'og:image': 'https://via.placeholder.com/800x450',
 							'og:site_name': 'Site',
+							'theme-color': '#ff0000',
 						},
 					}}
 				/>
