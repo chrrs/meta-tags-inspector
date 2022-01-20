@@ -1,5 +1,5 @@
 import { Box, ChakraProvider, Wrap } from '@chakra-ui/react';
-import Discord from './components/demo/Discord';
+import Discord from './components/preview/Discord';
 
 const App: React.FC = () => {
 	return (
