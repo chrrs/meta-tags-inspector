@@ -46,58 +46,58 @@ const Discord: React.FC<{ meta: Meta }> = (props) => {
 					<Link color="#01aff4" _hover={{ textDecor: 'underline' }}>
 						{location.toString()}
 					</Link>
-					<Box
+					<Flex
 						mt={1}
 						px={3}
 						py={4}
+						gap={4}
 						bg="#2f3136"
 						borderRadius={4}
 						borderLeftWidth={4}
 						borderColor={getTag(props.meta, 'theme-color') ?? '#202225'}
 					>
+						<Box>
+							<MetaText
+								meta={props.meta}
+								tag="og:site_name"
+								color="#dcddde"
+								fontSize="xs"
+								mb={1}
+							/>
+							<MetaLink
+								meta={props.meta}
+								tag={['og:title', 'title']}
+								color="#01aff4"
+								fontWeight="600"
+								_hover={{ textDecor: 'underline' }}
+							/>
+							<MetaText
+								meta={props.meta}
+								tag={['og:description', 'description']}
+								mt={2}
+								color="#dcddde"
+								fontSize="sm"
+							/>
+							{largeImage && (
+								<MetaImage
+									meta={props.meta}
+									mt={3}
+									borderRadius={4}
+									src="og:image"
+									alt="og:image:alt"
+								/>
+							)}
+						</Box>
 						{!largeImage && (
 							<MetaImage
 								meta={props.meta}
 								borderRadius={4}
-								float="right"
 								maxWidth={24}
-								mb={2}
-								ml={2}
 								src="og:image"
 								alt="og:image:alt"
 							/>
 						)}
-						<MetaText
-							meta={props.meta}
-							tag="og:site_name"
-							color="#dcddde"
-							fontSize="xs"
-							mb={1}
-						/>
-						<MetaLink
-							meta={props.meta}
-							tag={['og:title', 'title']}
-							color="#01aff4"
-							fontWeight="600"
-							_hover={{ textDecor: 'underline' }}
-						/>
-						<MetaText
-							meta={props.meta}
-							tag={['og:description', 'description']}
-							mt={2}
-							color="#dcddde"
-							fontSize="sm"
-						/>
-						{largeImage && (
-							<MetaImage
-								meta={props.meta}
-								mt={3}
-								borderRadius={4}
-								src="og:image"
-								alt="og:image:alt"
-							/>
-						)}
-					</Box>
+					</Flex>
 				</Box>
 			</Flex>
 		</PreviewFrame>
