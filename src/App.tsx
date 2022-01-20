@@ -11,7 +11,7 @@ const App: React.FC = () => {
 							title: 'This is the title of the page',
 							description:
 								'The text here, which is the description of the page, should describe what the page is about when you click it.',
-							thumbnail: 'https://via.placeholder.com/800x450',
+							'og:image': 'https://via.placeholder.com/800x450',
 						},
 					}}
 				/>

@@ -50,21 +50,23 @@ const Discord: React.FC<{ meta: Meta }> = (props) => {
 						borderLeftWidth={4}
 						borderColor="#202225"
 					>
+						{/* TODO: Add site name here. */}
 						<MetaLink
 							meta={props.meta}
-							tag="title"
+							tag={['og:title', 'title']}
 							color="#01aff4"
 							fontWeight="600"
 							_hover={{ textDecor: 'underline' }}
 						/>
 						<MetaText
 							meta={props.meta}
-							tag="description"
+							tag={['og:description', 'description']}
 							mt={2}
 							color="#dcddde"
 							fontSize="sm"
 						/>
-						<MetaImage meta={props.meta} mt={3} borderRadius={4} src="thumbnail" />
+						<MetaImage meta={props.meta} mt={3} borderRadius={4} src="og:image" />
+						{/* TODO: This won't always be a big image, sometimes small and in the corner. */}
 					</Box>
 				</Box>
 			</Flex>
