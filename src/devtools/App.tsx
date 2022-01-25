@@ -1,6 +1,6 @@
 import { Box, ChakraProvider, Wrap } from '@chakra-ui/react';
-import Discord from './components/preview/Discord';
-import RawTags from './components/preview/RawTags';
+import Discord from '$components/preview/Discord';
+import RawTags from '$components/preview/RawTags';
 
 const App: React.FC = () => {
 	const meta = {

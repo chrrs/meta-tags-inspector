@@ -1,7 +1,7 @@
 import { Box, VStack, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { Meta } from '../../lib/meta';
-import PreviewFrame from '../PreviewFrame';
+import { Meta } from '$lib/meta';
+import PreviewFrame from '$components/PreviewFrame';
 
 const RawTags: React.FC<{ meta: Meta }> = (props) => {
 	// TODO: Add more specific information to each property. (enum values, image links, etc.)

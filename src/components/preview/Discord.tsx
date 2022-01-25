@@ -1,10 +1,10 @@
-import { Avatar, Box, Flex, Text, Link, Icon } from '@chakra-ui/react';
+import { Avatar, Box, Flex, Text, Link } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { getTag, Meta } from '../../lib/meta';
-import MetaImage from '../meta/MetaImage';
-import MetaLink from '../meta/MetaLink';
-import MetaText from '../meta/MetaText';
-import PreviewFrame from '../PreviewFrame';
+import { getTag, Meta } from '$lib/meta';
+import MetaImage from '$components/meta/MetaImage';
+import MetaLink from '$components/meta/MetaLink';
+import MetaText from '$components/meta/MetaText';
+import PreviewFrame from '$components/PreviewFrame';
 
 const Discord: React.FC<{ meta: Meta }> = (props) => {
 	const [largeImage, setLargeImage] = useState(false);

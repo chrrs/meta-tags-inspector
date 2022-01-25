@@ -1,5 +1,5 @@
 import { Image, ImageProps } from '@chakra-ui/react';
-import { getTag, Meta } from '../../lib/meta';
+import { getTag, Meta } from '$lib/meta';
 
 const MetaImage: React.FC<
 	{
