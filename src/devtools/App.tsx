@@ -16,7 +16,7 @@ const App: React.FC = () => {
 
 	return (
 		<ChakraProvider>
-			<Wrap p={8} minH="100vh" bg="gray.50" spacing={8} justify="center">
+			<Wrap fontSize="md" p={8} minH="100vh" bg="gray.50" spacing={8} justify="center">
 				<Box flex={1} minW="md" maxW="xl">
 					<RawTags meta={meta} />
 				</Box>
