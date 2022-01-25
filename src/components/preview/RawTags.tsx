@@ -32,13 +32,13 @@ const RawTags: React.FC<{ meta: Meta }> = (props) => {
 				{['General', ...categories.map((it) => it[0])].map(
 					(category) =>
 						tags[category] && (
-							<Box w="full">
+							<Box key={category} w="full">
 								<Text fontSize="sm" fontWeight="600" color="gray.500" mb={1}>
 									{category}
 								</Text>
 								<VStack lineHeight="5" spacing={1} align="start">
 									{tags[category]?.map((item) => (
-										<Text>
+										<Text key={item[0]}>
 											<Text as="code">{item[0]}</Text>: {item[1]}
 										</Text>
 									))}
