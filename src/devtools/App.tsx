@@ -1,30 +1,24 @@
-import { Box, ChakraProvider, Wrap } from '@chakra-ui/react';
-import Discord from '$components/preview/Discord';
-import RawTags from '$components/preview/RawTags';
 
 const App: React.FC = () => {
-	const meta = {
-		tags: {
-			title: 'Some website',
-			description:
-				'This is a pretty long description in order to test how the UI will look when lines overflow onto the next line.',
-			'og:image': 'https://via.placeholder.com/800x450',
-			'og:site_name': 'Site',
-			'twitter:card': 'summary_large_image',
-		},
-	};
+	const [_, forceUpdate] = useReducer((x) => x + 1, 0);
+	const [meta] = useState(new Meta());
+
+	useEffect(() => {
+		const port = chrome.runtime.connect();
+
+		port.onMessage.addListener((message: [string, any]) => {
+			meta.update(message[1] ?? {});
+			forceUpdate();
+		});
+
+		port.postMessage(['init', { tabId: chrome?.devtools?.inspectedWindow?.tabId }]);
+
+		return () => port.disconnect();
+	}, [meta]);
 
 	return (
-		<ChakraProvider>
-			<Wrap fontSize="md" p={4} minH="100vh" bg="gray.50" spacing={4} justify="center">
-				<Box flex={1} minW="md" maxW="xl">
-					<RawTags meta={meta} />
-				</Box>
-				<Box flex={1} minW="md" maxW="xl">
-					<Discord meta={meta} />
-				</Box>
-			</Wrap>
-		</ChakraProvider>
+		<>
+		</>
 	);
 };
 
