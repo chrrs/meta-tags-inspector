@@ -3,7 +3,8 @@ function refetchMetaTags() {
 
 	const titleElement = document.head.getElementsByTagName('title')[0];
 	if (titleElement) {
-		meta['<title>'] = titleElement.innerHTML;
+		tags['<url>'] = window.location.toString();
+		tags['<title>'] = titleElement.innerHTML;
 	}
 
 	for (const tag of document.head.querySelectorAll('meta')) {
