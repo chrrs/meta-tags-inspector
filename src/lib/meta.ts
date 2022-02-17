@@ -1,23 +1,19 @@
 export class Meta {
-	tags: Record<string, string> = {};
+	tags: Record<string, string>;
 
-	get(name: string | string[]): string | undefined {
-		if (typeof name === 'string') {
-			return this.tags[name];
-		} else {
-			for (const s of name) {
-				const tag = this.tags[s];
-				if (tag) {
-					return tag;
-				}
-			}
-
-			return undefined;
-		}
+	constructor(tags: Record<string, string>) {
+		this.tags = tags;
 	}
 
-	update(tags: Record<string, string>) {
-		this.tags = tags;
+	get(...name: string[]): string | undefined {
+		for (const s of name) {
+			const tag = this.tags[s];
+			if (tag !== undefined) {
+				return tag;
+			}
+		}
+
+		return undefined;
 	}
 
 	subset<S extends readonly string[]>(subset: S) {
@@ -25,7 +21,7 @@ export class Meta {
 	}
 }
 
-export class MetaSubset<S extends readonly string[], T = keyof S> {
+export class MetaSubset<S extends readonly string[], T = S[number]> {
 	meta: Meta;
 	subset: S;
 
@@ -34,8 +30,8 @@ export class MetaSubset<S extends readonly string[], T = keyof S> {
 		this.subset = subset;
 	}
 
-	get(name: T | T[]): string | undefined {
+	get(...name: T[]): string | undefined {
 		// @ts-ignore
-		return this.meta.get(name);
+		return this.meta.get(...name);
 	}
 }
