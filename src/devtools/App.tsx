@@ -17,13 +17,13 @@ const App: React.FC = () => {
 	}, []);
 
 	return (
-		<>
 			{Object.entries(tags).map(([key, value]) => (
 				<p key={key}>
 					<b>{key}:</b> {value}
 				</p>
 			))}
-		</>
+		<ChakraProvider>
+		</ChakraProvider>
 	);
 };
 
