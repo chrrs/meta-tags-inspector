@@ -9,7 +9,10 @@ function refetchMetaTags() {
 	}
 
 	for (const tag of document.head.querySelectorAll('meta')) {
-		const key = tag.getAttribute('name') ?? tag.getAttribute('property');
+		const key =
+			tag.getAttribute('name') ??
+			tag.getAttribute('property') ??
+			tag.getAttribute('itemprop');
 		const value = tag.getAttribute('content');
 
 		if (!key || !value) {
