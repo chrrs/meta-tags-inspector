@@ -10,4 +10,7 @@ export default {
 		},
 	],
 	web_accessible_resources: ['devtools/index.html'],
+	background: {
+		scripts: ['background.ts'],
+	},
 } as ManifestV2;

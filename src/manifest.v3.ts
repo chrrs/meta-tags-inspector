@@ -15,4 +15,7 @@ export default {
 			matches: ['*://*/*'],
 		},
 	],
+	background: {
+		service_worker: 'background.ts',
+	},
 } as ManifestV3;

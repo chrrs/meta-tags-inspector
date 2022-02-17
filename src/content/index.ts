@@ -1,6 +1,7 @@
-function refetchMetaTags() {
-	const meta: Record<string, string> = {};
+let tags: Record<string, string> = {};
 
+function refetchMetaTags() {
+	tags = {};
 	const titleElement = document.head.getElementsByTagName('title')[0];
 	if (titleElement) {
 		tags['<url>'] = window.location.toString();
@@ -15,15 +16,28 @@ function refetchMetaTags() {
 			continue;
 		}
 
-		meta[key] = value;
+		tags[key] = value;
 	}
 
-	console.log(meta);
+	chrome.runtime.sendMessage(['tags:update', tags]);
 }
 
-refetchMetaTags();
 new MutationObserver(refetchMetaTags).observe(document.head, {
 	subtree: true,
 	childList: true,
 	characterData: true,
+});
+
+if (document.readyState !== 'complete') {
+	window.addEventListener('load', refetchMetaTags);
+} else {
+	refetchMetaTags();
+}
+
+window.addEventListener('focus', refetchMetaTags);
+
+chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
+	if (message === 'tags:request') {
+		sendResponse(tags);
+	}
 });

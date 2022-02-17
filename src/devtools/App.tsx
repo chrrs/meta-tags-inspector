@@ -1,5 +1,9 @@
+import { Meta } from '$lib/meta';
+import { useEffect, useReducer } from 'react';
+import { useState } from 'react';
 
 const App: React.FC = () => {
+	// TODO: useState tags
 	const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 	const [meta] = useState(new Meta());
 
@@ -18,6 +22,11 @@ const App: React.FC = () => {
 
 	return (
 		<>
+			{Object.entries(meta.tags).map(([key, value]) => (
+				<p key={key}>
+					<b>{key}:</b> {value}
+				</p>
+			))}
 		</>
 	);
 };
