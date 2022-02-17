@@ -1,3 +1,6 @@
+import DiscordPreview from '$components/preview/DiscordPreview';
+import { Meta } from '$lib/meta';
+import { Box, ChakraProvider } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -17,12 +20,9 @@ const App: React.FC = () => {
 	}, []);
 
 	return (
-			{Object.entries(tags).map(([key, value]) => (
-				<p key={key}>
-					<b>{key}:</b> {value}
-				</p>
-			))}
 		<ChakraProvider>
+			<DiscordPreview meta={new Meta(tags)} />
+			{JSON.stringify(tags)}
 		</ChakraProvider>
 	);
 };
