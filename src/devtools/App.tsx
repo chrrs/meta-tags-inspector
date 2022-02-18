@@ -24,7 +24,16 @@ const App: React.FC = () => {
 	return (
 		<ChakraProvider>
 			<DiscordPreview meta={new Meta(tags)} />
-			{JSON.stringify(tags)}
+			<Box fontSize="sm">
+				<Flex px={4} py={2} bg="gray.100">
+					<Text>
+						<b>Note: </b>
+						Previews are not always 100% accurate. Make sure to check manually if
+						necessary.
+					</Text>
+				</Flex>
+				{JSON.stringify(tags)}
+			</Box>
 		</ChakraProvider>
 	);
 };
