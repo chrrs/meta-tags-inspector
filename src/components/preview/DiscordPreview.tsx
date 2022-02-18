@@ -1,6 +1,7 @@
 import { Meta, MetaSubset } from '$lib/meta';
 import { Avatar, Box, Flex, Link, Text, Image } from '@chakra-ui/react';
 import OptionalText from '$components/OptionalText';
+import Preview from '$components/Preview';
 
 const DISCORD_SUBSET = [
 	'<url>',
@@ -94,23 +95,25 @@ const DiscordPreview: React.FC<{ meta: Meta }> = ({ meta }) => {
 	const subset = meta.subset(DISCORD_SUBSET);
 
 	return (
-		<Flex bg="#36393f" p={4} gap={3} fontSize="md">
-			<Avatar name="Some Person" size="md" />
-			<Box>
-				<Text>
-					<Text as="span" fontWeight="600" color="#fdfdfd" mr={3}>
-						Some Person
+		<Preview subset={subset} title="Discord">
+			<Flex bg="#36393f" p={4} gap={3} fontSize="md">
+				<Avatar name="Some Person" size="md" />
+				<Box>
+					<Text>
+						<Text as="span" fontWeight="600" color="#fdfdfd" mr={3}>
+							Some Person
+						</Text>
+						<Text as="span" fontSize="xs" color="#656b6e">
+							today at 12:00
+						</Text>
 					</Text>
-					<Text as="span" fontSize="xs" color="#656b6e">
-						today at 12:00
-					</Text>
-				</Text>
-				<Link color="#01aff4" _hover={{ textDecor: 'underline' }}>
-					{subset.get('<url>') ?? '???'}
-				</Link>
-				<Embed subset={subset} />
-			</Box>
-		</Flex>
+					<Link color="#01aff4" _hover={{ textDecor: 'underline' }}>
+						{subset.get('<url>') ?? '???'}
+					</Link>
+					<Embed subset={subset} />
+				</Box>
+			</Flex>
+		</Preview>
 	);
 };
 
