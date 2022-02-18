@@ -10,6 +10,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import { emptyDir } from 'rollup-plugin-empty-dir';
 import zip from 'rollup-plugin-zip';
 import progress from 'rollup-plugin-progress';
+import serve from 'rollup-plugin-serve';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -33,6 +34,7 @@ const getConfig = (version) =>
 			resolve(),
 			commonjs(),
 			emptyDir(),
+			!isProduction && serve('dist/v3/devtools'),
 			isProduction && zip({ dir: 'releases/' + version }),
 		],
 	});
