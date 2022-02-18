@@ -1,6 +1,6 @@
 import DiscordPreview from '$components/preview/DiscordPreview';
 import { Meta } from '$lib/meta';
-import { ChakraProvider } from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex, Text, VStack } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -23,7 +23,6 @@ const App: React.FC = () => {
 
 	return (
 		<ChakraProvider>
-			<DiscordPreview meta={new Meta(tags)} />
 			<Box fontSize="sm">
 				<Flex px={4} py={2} bg="gray.100">
 					<Text>
@@ -31,6 +30,14 @@ const App: React.FC = () => {
 						Previews are not always 100% accurate. Make sure to check manually if
 						necessary.
 					</Text>
+				</Flex>
+				<Flex p={4} gap={4}>
+					<Box flexGrow="1">
+						<DiscordPreview meta={new Meta(tags)} />
+					</Box>
+					<Box flexGrow="1">
+						<DiscordPreview meta={new Meta(tags)} />
+					</Box>
 				</Flex>
 				{JSON.stringify(tags)}
 			</Box>
