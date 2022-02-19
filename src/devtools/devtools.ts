@@ -1,1 +1,1 @@
-chrome.devtools.panels.create('Meta tags', '', '/devtools/index.html');
+chrome.devtools.panels.create('Meta tags', '', '/devtools/panel.html');

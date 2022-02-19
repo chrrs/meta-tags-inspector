@@ -11,7 +11,7 @@ export default {
 	],
 	web_accessible_resources: [
 		{
-			resources: ['devtools/index.html'],
+			resources: ['devtools/panel.html'],
 			matches: ['*://*/*'],
 		},
 	],

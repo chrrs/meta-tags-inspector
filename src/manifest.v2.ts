@@ -9,7 +9,7 @@ export default {
 			matches: ['https://*/*', 'http://*/*'],
 		},
 	],
-	web_accessible_resources: ['devtools/index.html'],
+	web_accessible_resources: ['devtools/panel.html'],
 	background: {
 		scripts: ['background.ts'],
 	},

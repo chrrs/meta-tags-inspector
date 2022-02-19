@@ -1,7 +1,7 @@
 const devtoolsTabPorts: Record<number, chrome.runtime.Port> = {};
 
 chrome.runtime.onConnect.addListener((port) => {
-	if (port?.sender?.url === chrome.runtime.getURL('/devtools/index.html')) {
+	if (port?.sender?.url === chrome.runtime.getURL('/devtools/panel.html')) {
 		port.onMessage.addListener(handleDevtoolsMessage);
 	} else {
 		port.disconnect();
