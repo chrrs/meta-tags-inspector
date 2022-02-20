@@ -2,6 +2,7 @@ import { Meta, MetaSubset } from '$lib/meta';
 import { Avatar, Box, Flex, Link, Text, Image } from '@chakra-ui/react';
 import OptionalText from '$components/OptionalText';
 import Preview from '$components/Preview';
+import { useEffect, useState } from 'react';
 
 const DISCORD_SUBSET = [
 	'<url>',
@@ -94,8 +95,25 @@ const Embed: React.FC<{ subset: MetaSubset<typeof DISCORD_SUBSET> }> = ({ subset
 const DiscordPreview: React.FC<{ meta: Meta }> = ({ meta }) => {
 	const subset = meta.subset(DISCORD_SUBSET);
 
+	const [issues, setIssues] = useState<string[]>([]);
+
+	useEffect(() => {
+		const issues = [] as string[];
+
+		const ogTitle = subset.get('og:title');
+		const ogDescription = subset.get('og:description');
+		const description = subset.get('description');
+		if ((ogTitle && !ogDescription && description) || (!ogTitle && ogDescription)) {
+			issues.push(
+				'OpenGraph tags are mixed with non-OpenGraph tags, which could lead to issues. This is probably caused by a missing og:title or og:description tag.'
+			);
+		}
+
+		setIssues(issues);
+	}, [meta]);
+
 	return (
-		<Preview subset={subset} title="Discord">
+		<Preview subset={subset} title="Discord" issues={issues}>
 			<Flex bg="#36393f" p={4} gap={3} fontSize="md">
 				<Avatar name="Some Person" size="md" />
 				<Box>
