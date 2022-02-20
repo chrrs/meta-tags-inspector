@@ -43,7 +43,7 @@ const Preview: React.FC<{
 									<Code
 										key={tag}
 										colorScheme={
-											subset.get(tag) === undefined ? 'red' : 'green'
+											subset.get(tag) === undefined ? undefined : 'green'
 										}
 									>
 										{tag}
