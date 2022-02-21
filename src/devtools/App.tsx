@@ -33,10 +33,10 @@ const App: React.FC = () => {
 					</Text>
 				</Flex>
 				<Flex p={4} gap={4} direction={{ base: 'column', xl: 'row' }}>
-					<Box flexGrow="1">
+					<Box flex="1">
 						<DiscordPreview meta={new Meta(tags)} />
 					</Box>
-					<Box flexGrow="1">
+					<Box flex="1">
 						<TwitterPreview meta={new Meta(tags)} />
 					</Box>
 				</Flex>
