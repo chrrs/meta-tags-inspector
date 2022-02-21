@@ -1,6 +1,6 @@
 import OptionalText from '$components/OptionalText';
 import Preview from '$components/Preview';
-import { Meta, MetaSubset } from '$lib/meta';
+import { Meta } from '$lib/meta';
 import { Avatar, Box, Flex, Link, Text, Image, AspectRatio, Icon, Center } from '@chakra-ui/react';
 import { ReactNode, useEffect, useState } from 'react';
 
