@@ -1,3 +1,8 @@
+// TODO: We might want to change how we fetch meta tags. Right now, we grab all tags
+//       that are currently present in the DOM. However, a lot of sites don't actually
+//       update the meta tags after the initial request. For this reason, it would
+//       probably be better to manually request each time the URL changes.
+
 let tags: Record<string, string> = {};
 
 function refetchMetaTags() {
