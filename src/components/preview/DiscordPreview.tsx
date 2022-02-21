@@ -21,9 +21,7 @@ const Embed: React.FC<{ subset: MetaSubset<typeof DISCORD_SUBSET> }> = ({ subset
 	const largeImage = subset.get('twitter:card') === 'summary_large_image';
 	const showTitle = subset.get('description', 'og:title') !== undefined;
 	const show = showTitle || (subset.get('og:image') && !largeImage) || subset.get('og:site_name');
-
-	let imageUrl = subset.get('og:image');
-	imageUrl = imageUrl && new URL(imageUrl, subset.get('<url>')).href;
+	const imageUrl = subset.getImage(subset.get('<url>'), 'og:image');
 
 	if (!showTitle && subset.get('og:image') && largeImage) {
 		return (

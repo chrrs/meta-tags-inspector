@@ -34,4 +34,9 @@ export class MetaSubset<S extends readonly string[], T = S[number]> {
 		// @ts-ignore
 		return this.meta.get(...name);
 	}
+
+	getImage(url: string | undefined, ...name: T[]): string | undefined {
+		let imageUrl = this.get(...name);
+		return imageUrl && new URL(imageUrl, url).href;
+	}
 }
