@@ -31,7 +31,7 @@ const App: React.FC = () => {
 						necessary.
 					</Text>
 				</Flex>
-				<Flex p={4} gap={4}>
+				<Flex p={4} gap={4} direction={{ base: 'column', xl: 'row' }}>
 					<Box flexGrow="1">
 						<DiscordPreview meta={new Meta(tags)} />
 					</Box>
