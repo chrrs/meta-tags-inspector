@@ -1,4 +1,5 @@
 import DiscordPreview from '$components/preview/DiscordPreview';
+import { TwitterPreview } from '$components/preview/TwitterPreview';
 import { Meta } from '$lib/meta';
 import { Box, ChakraProvider, Flex, Text, VStack } from '@chakra-ui/react';
 import { useEffect } from 'react';
@@ -36,7 +37,7 @@ const App: React.FC = () => {
 						<DiscordPreview meta={new Meta(tags)} />
 					</Box>
 					<Box flexGrow="1">
-						<DiscordPreview meta={new Meta(tags)} />
+						<TwitterPreview meta={new Meta(tags)} />
 					</Box>
 				</Flex>
 				{JSON.stringify(tags)}
