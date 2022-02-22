@@ -1,7 +1,7 @@
 import DiscordPreview from '$components/preview/DiscordPreview';
 import { TwitterPreview } from '$components/preview/TwitterPreview';
 import { Meta } from '$lib/meta';
-import { Box, ChakraProvider, Flex, Text, VStack } from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -12,7 +12,7 @@ const App: React.FC = () => {
 		useEffect(() => {
 			const port = chrome.runtime.connect();
 
-			port.onMessage.addListener((message: [string, any]) => {
+			port.onMessage.addListener((message: [string, Record<string, string>]) => {
 				setTags(message[1]);
 			});
 

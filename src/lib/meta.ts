@@ -31,12 +31,13 @@ export class MetaSubset<S extends readonly string[], T = S[number]> {
 	}
 
 	get(...name: T[]): string | undefined {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
 		return this.meta.get(...name);
 	}
 
 	getImage(url: string | undefined, ...name: T[]): string | undefined {
-		let imageUrl = this.get(...name);
+		const imageUrl = this.get(...name);
 		return imageUrl && new URL(imageUrl, url).href;
 	}
 }

@@ -8,7 +8,7 @@ chrome.runtime.onConnect.addListener((port) => {
 	}
 });
 
-function handleDevtoolsMessage(message: [string, any], port: chrome.runtime.Port) {
+function handleDevtoolsMessage(message: [string, { tabId: number }], port: chrome.runtime.Port) {
 	if (message[0] === 'init') {
 		devtoolsTabPorts[message[1].tabId] = port;
 
@@ -25,8 +25,7 @@ function handleDevtoolsMessage(message: [string, any], port: chrome.runtime.Port
 }
 
 chrome.runtime.onMessage.addListener((message, sender) => {
-	let tab = sender?.tab?.id;
-	console.log(tab);
+	const tab = sender?.tab?.id;
 	if (tab) {
 		devtoolsTabPorts[tab]?.postMessage(message);
 	}

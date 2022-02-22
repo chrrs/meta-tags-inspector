@@ -3,7 +3,7 @@ import { InfoOutlineIcon, WarningTwoIcon } from '@chakra-ui/icons';
 import { Box, Code, Flex, HStack, ListItem, Text, Tooltip, UnorderedList } from '@chakra-ui/react';
 
 const Preview: React.FC<{
-	subset: MetaSubset<any>;
+	subset: MetaSubset<readonly string[]>;
 	title: string;
 	issues?: string[];
 }> = ({ subset, title, children, issues }) => {
@@ -39,7 +39,7 @@ const Preview: React.FC<{
 						label={
 							<Flex direction="column" align="flex-start" gap={1} p={2}>
 								<Text fontWeight="bold">Supported meta tags</Text>
-								{subset.subset.map((tag: string) => (
+								{subset.subset.map((tag) => (
 									<Code
 										key={tag}
 										colorScheme={
