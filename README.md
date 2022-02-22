@@ -13,7 +13,7 @@ I got tired of deploying my projects tens of times just to get my meta tags look
 
 ## Development setup
 
-After installing all dependencies using `yarn`, you can the development server using
+After installing all dependencies using `yarn`, you can start the development server using
 
 ```sh
 yarn dev
