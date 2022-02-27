@@ -1,4 +1,4 @@
-import { Meta, MetaSubset } from '$lib/meta';
+import { Meta } from '$lib/meta';
 import { Avatar, Box, Flex, Link, Text, Image } from '@chakra-ui/react';
 import OptionalText from '$components/OptionalText';
 import Preview from '$components/Preview';
@@ -17,23 +17,18 @@ const DISCORD_SUBSET = [
 	'og:image:alt',
 ] as const;
 
-const Embed: React.FC<{ subset: MetaSubset<typeof DISCORD_SUBSET> }> = ({ subset }) => {
-	const largeImage = subset.get('twitter:card') === 'summary_large_image';
-	const showTitle = subset.get('description', 'og:title') !== undefined;
-	const show = showTitle || (subset.get('og:image') && !largeImage) || subset.get('og:site_name');
-	const imageUrl = subset.getImage(subset.get('<url>'), 'og:image');
-
-	if (!showTitle && subset.get('og:image') && largeImage) {
-		return (
-			<Image
-				mt={1}
-				borderRadius={4}
-				maxWidth="md"
-				src={subset.get('og:image')}
-				alt={subset.get('og:image:alt')}
-			/>
-		);
-	} else if (show) {
+const Embed: React.FC<{
+	type: 'large_image' | 'large_summary' | 'small_summary';
+	siteName?: string;
+	title?: string;
+	description?: string;
+	imageUrl?: string;
+	imageAlt?: string;
+	themeColor?: string;
+}> = ({ type, siteName, title, description, imageUrl, imageAlt, themeColor }) => {
+	if (type === 'large_image') {
+		return <Image mt={1} borderRadius={4} maxWidth="md" src={imageUrl} alt={imageAlt} />;
+	} else {
 		return (
 			<Flex
 				width="fit-content"
@@ -45,48 +40,40 @@ const Embed: React.FC<{ subset: MetaSubset<typeof DISCORD_SUBSET> }> = ({ subset
 				bg="#2f3136"
 				borderRadius={4}
 				borderLeftWidth={4}
-				borderColor={subset.get('theme-color') ?? '#202225'}
+				borderColor={themeColor ?? '#202225'}
 			>
 				<Box>
 					<OptionalText
 						color="#dcddde"
 						fontSize="xs"
-						mb={showTitle ? 1 : 0}
-						content={subset.get('og:site_name')}
+						mb={title !== undefined ? 1 : 0}
+						content={siteName}
 					/>
-					{showTitle && (
-						<Link color="#01aff4" fontWeight="600" _hover={{ textDecor: 'underline' }}>
-							{subset.get('og:title', '<title>')}
-						</Link>
-					)}
+					<Link color="#01aff4" fontWeight="600" _hover={{ textDecor: 'underline' }}>
+						{/* TODO: Make an OptionalLink element */}
+						{title}
+					</Link>
 					<OptionalText
-						mt={showTitle ? 2 : 0}
+						mt={title !== undefined ? 2 : 0}
 						color="#dcddde"
 						fontSize="sm"
-						content={subset.get('og:description', 'description')}
+						content={description}
 					/>
-					{largeImage && (
-						<Image
-							mt={3}
-							borderRadius={4}
-							src={imageUrl}
-							alt={subset.get('og:image:alt')}
-						/>
+					{type === 'large_summary' && (
+						<Image mt={3} borderRadius={4} src={imageUrl} alt={imageAlt} />
 					)}
 				</Box>
-				{!largeImage && (
+				{type === 'small_summary' && (
 					<Image
 						height="fit-content"
 						borderRadius={4}
 						maxWidth={24}
 						src={imageUrl}
-						alt={subset.get('og:image:alt')}
+						alt={imageAlt}
 					/>
 				)}
 			</Flex>
 		);
-	} else {
-		return <></>;
 	}
 };
 
@@ -110,6 +97,17 @@ const DiscordPreview: React.FC<{ meta: Meta }> = ({ meta }) => {
 		setIssues(issues);
 	}, [meta]);
 
+	const showTitle = subset.get('description', 'og:title') !== undefined;
+	const embedType =
+		subset.get('twitter:card') === 'summary_large_image'
+			? subset.get('og:image') !== undefined && !showTitle
+				? 'large_image'
+				: 'large_summary'
+			: 'small_summary';
+
+	const showEmbed =
+		showTitle || embedType === 'large_image' || subset.get('og:site_name', 'og:description');
+
 	return (
 		<Preview subset={subset} title="Discord" issues={issues}>
 			<Flex bg="#36393f" p={4} gap={3} fontSize="md">
@@ -126,7 +124,18 @@ const DiscordPreview: React.FC<{ meta: Meta }> = ({ meta }) => {
 					<Link color="#01aff4" _hover={{ textDecor: 'underline' }}>
 						{subset.get('<url>') ?? '???'}
 					</Link>
-					<Embed subset={subset} />
+
+					{showEmbed && (
+						<Embed
+							type={embedType}
+							siteName={subset.get('og:site_name')}
+							title={showTitle ? subset.get('og:title', '<title>') : undefined}
+							description={subset.get('og:description', 'description')}
+							imageUrl={subset.getImage(subset.get('<url>'), 'og:image')}
+							imageAlt={subset.get('og:image:alt')}
+							themeColor={subset.get('theme-color')}
+						/>
+					)}
 				</Box>
 			</Flex>
 		</Preview>
