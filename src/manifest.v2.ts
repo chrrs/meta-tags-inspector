@@ -13,4 +13,10 @@ export default {
 	background: {
 		scripts: ['background.ts'],
 	},
+	icons: Object.fromEntries(
+		[16, 32, 48, 64, 96, 128, 256].map((size) => [
+			size.toString(),
+			`assets/favicon-${size}x${size}.png`,
+		])
+	),
 } as ManifestV2;

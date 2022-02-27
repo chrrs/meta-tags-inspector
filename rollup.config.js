@@ -11,6 +11,7 @@ import { emptyDir } from 'rollup-plugin-empty-dir';
 import zip from 'rollup-plugin-zip';
 import progress from 'rollup-plugin-progress';
 import serve from 'rollup-plugin-serve';
+import copy from 'rollup-plugin-copy2';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -25,6 +26,12 @@ const getConfig = (version) =>
 		plugins: [
 			progress(),
 			chromeExtension(),
+			copy({
+				assets: [
+					['src/devtools/panel-light.svg', 'devtools/panel-light.svg'],
+					['src/devtools/panel-dark.svg', 'devtools/panel-dark.svg'],
+				],
+			}),
 			simpleReloader(),
 			replace({
 				preventAssignment: true,
