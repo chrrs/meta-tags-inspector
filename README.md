@@ -9,7 +9,15 @@ I got tired of deploying my projects tens of times just to get my meta tags look
 
 ## Building
 
-`// TODO`
+After installing all dependencies using `yarn`, you can build the extension using
+
+```sh
+yarn release
+```
+
+This will put two ZIP files in the `release` directory, one for Manifest v2 and one for Manifest v3.
+
+> **Note:** You'll probably not need to do this, as the only use for these ZIP files is to upload them to a browser extension store. To actually load the extension in your browser while developing, please read the next section.
 
 ## Development setup
 
