@@ -1,6 +1,7 @@
 import { Meta } from '$lib/meta';
 import { Avatar, Box, Flex, Link, Text, Image } from '@chakra-ui/react';
 import OptionalText from '$components/OptionalText';
+import OptionalLink from '$components/OptionalLink';
 import Preview from '$components/Preview';
 import { useEffect, useState } from 'react';
 
@@ -49,10 +50,12 @@ const Embed: React.FC<{
 						mb={title !== undefined ? 1 : 0}
 						content={siteName}
 					/>
-					<Link color="#01aff4" fontWeight="600" _hover={{ textDecor: 'underline' }}>
-						{/* TODO: Make an OptionalLink element */}
-						{title}
-					</Link>
+					<OptionalLink
+						color="#01aff4"
+						fontWeight="600"
+						_hover={{ textDecor: 'underline' }}
+						content={title}
+					/>
 					<OptionalText
 						mt={title !== undefined ? 2 : 0}
 						color="#dcddde"
