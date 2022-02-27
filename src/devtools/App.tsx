@@ -5,7 +5,7 @@ import { Box, ChakraProvider, Flex, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-const App: React.FC = () => {
+const App: React.VFC = () => {
 	const [tags, setTags] = useState<Record<string, string>>({});
 
 	if (chrome?.runtime) {

@@ -21,7 +21,7 @@ const TWITTER_SUBSET = [
 	'og:image:alt',
 ] as const;
 
-const SummaryLargeImageCard: React.FC<{
+const SummaryLargeImageCard: React.VFC<{
 	baseUrl: string;
 	title: string;
 	description?: string;
@@ -51,7 +51,7 @@ const SummaryLargeImageCard: React.FC<{
 	);
 };
 
-const SummaryCard: React.FC<{
+const SummaryCard: React.VFC<{
 	baseUrl: string;
 	title: string;
 	description?: string;
@@ -100,7 +100,7 @@ const SummaryCard: React.FC<{
 	);
 };
 
-export const TwitterPreview: React.FC<{ meta: Meta }> = ({ meta }) => {
+export const TwitterPreview: React.VFC<{ meta: Meta }> = ({ meta }) => {
 	const subset = meta.subset(TWITTER_SUBSET);
 
 	const [cardType, setCardType] = useState<string | undefined>(undefined);

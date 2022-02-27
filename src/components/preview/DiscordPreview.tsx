@@ -18,7 +18,7 @@ const DISCORD_SUBSET = [
 	'og:image:alt',
 ] as const;
 
-const Embed: React.FC<{
+const Embed: React.VFC<{
 	type: 'large_image' | 'large_summary' | 'small_summary';
 	siteName?: string;
 	title?: string;
@@ -80,7 +80,7 @@ const Embed: React.FC<{
 	}
 };
 
-const DiscordPreview: React.FC<{ meta: Meta }> = ({ meta }) => {
+const DiscordPreview: React.VFC<{ meta: Meta }> = ({ meta }) => {
 	const subset = meta.subset(DISCORD_SUBSET);
 
 	const [issues, setIssues] = useState<string[]>([]);
