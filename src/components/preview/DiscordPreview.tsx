@@ -7,13 +7,13 @@ import { useEffect, useState } from 'react';
 
 const DISCORD_SUBSET = [
 	'<url>',
-	['og:title', '<title>'],
-	['og:description', 'description'],
+	['twitter:title', 'og:title', '<title>'],
+	['twitter:description', 'og:description', 'description'],
 	'theme-color',
 	'twitter:card',
 	'og:site_name',
-	'og:image',
-	'og:image:alt',
+	['twitter:image', 'og:image'],
+	['twitter:image:alt', 'og:image:alt'],
 ] as const;
 
 const Embed: React.VFC<{
@@ -98,16 +98,18 @@ const DiscordPreview: React.VFC<{ meta: Meta }> = ({ meta }) => {
 		setIssues(issues);
 	}, [meta]);
 
-	const showTitle = subset.get('description', 'og:title') !== undefined;
+	const showTitle = subset.get('description', 'twitter:title', 'og:title') !== undefined;
 	const embedType =
 		subset.get('twitter:card') === 'summary_large_image'
-			? subset.get('og:image') !== undefined && !showTitle
+			? subset.get('twitter:image', 'og:image') !== undefined && !showTitle
 				? 'large_image'
 				: 'large_summary'
 			: 'small_summary';
 
 	const showEmbed =
-		showTitle || embedType === 'large_image' || subset.get('og:site_name', 'og:description');
+		showTitle ||
+		embedType === 'large_image' ||
+		subset.get('og:site_name', 'twitter:description', 'og:description');
 
 	return (
 		<Preview subset={subset} title="Discord" issues={issues}>
@@ -130,10 +132,22 @@ const DiscordPreview: React.VFC<{ meta: Meta }> = ({ meta }) => {
 						<Embed
 							type={embedType}
 							siteName={subset.get('og:site_name')}
-							title={showTitle ? subset.get('og:title', '<title>') : undefined}
-							description={subset.get('og:description', 'description')}
-							imageUrl={subset.getImage(subset.get('<url>'), 'og:image')}
-							imageAlt={subset.get('og:image:alt')}
+							title={
+								showTitle
+									? subset.get('twitter:title', 'og:title', '<title>')
+									: undefined
+							}
+							description={subset.get(
+								'twitter:description',
+								'og:description',
+								'description'
+							)}
+							imageUrl={subset.getImage(
+								subset.get('<url>'),
+								'twitter:image',
+								'og:image'
+							)}
+							imageAlt={subset.get('twitter:image:alt', 'og:image:alt')}
 							themeColor={subset.get('theme-color')}
 						/>
 					)}
