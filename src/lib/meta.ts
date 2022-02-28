@@ -16,12 +16,17 @@ export class Meta {
 		return undefined;
 	}
 
-	subset<S extends readonly string[]>(subset: S) {
+	subset<
+		S extends readonly (string | readonly string[])[],
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		T = { [K in keyof S]: S[K] extends readonly string[] ? S[K][number] : S[K] }[number]
+	>(subset: S): MetaSubset<S, T> {
 		return new MetaSubset(this, subset);
 	}
 }
 
-export class MetaSubset<S extends readonly string[], T = S[number]> {
+export class MetaSubset<S extends readonly (string | readonly string[])[], T> {
 	meta: Meta;
 	subset: S;
 

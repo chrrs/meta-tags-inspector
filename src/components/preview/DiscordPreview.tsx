@@ -7,12 +7,10 @@ import { useEffect, useState } from 'react';
 
 const DISCORD_SUBSET = [
 	'<url>',
-	'<title>',
-	'description',
+	['og:title', '<title>'],
+	['og:description', 'description'],
 	'theme-color',
 	'twitter:card',
-	'og:title',
-	'og:description',
 	'og:site_name',
 	'og:image',
 	'og:image:alt',

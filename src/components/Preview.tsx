@@ -3,7 +3,7 @@ import { InfoOutlineIcon, WarningTwoIcon } from '@chakra-ui/icons';
 import { Box, Code, Flex, HStack, ListItem, Text, Tooltip, UnorderedList } from '@chakra-ui/react';
 
 const Preview: React.FC<{
-	subset: MetaSubset<readonly string[]>;
+	subset: MetaSubset<readonly (string | readonly string[])[], unknown>;
 	title: string;
 	issues?: string[];
 }> = ({ subset, title, children, issues }) => {
@@ -39,16 +39,25 @@ const Preview: React.FC<{
 						label={
 							<Flex direction="column" align="flex-start" gap={1} p={2}>
 								<Text fontWeight="bold">Supported meta tags</Text>
-								{subset.subset.map((tag) => (
-									<Code
-										key={tag}
-										colorScheme={
-											subset.get(tag) === undefined ? undefined : 'green'
-										}
-									>
-										{tag}
-									</Code>
-								))}
+								{subset.subset.map((tag) =>
+									typeof tag === 'string' ? (
+										<Code key={tag} colorScheme={subset.get(tag) && 'green'}>
+											{tag}
+										</Code>
+									) : (
+										<Text key={tag.join(' ')}>
+											{tag.map((tag) => (
+												<Code
+													key={tag}
+													mr={1}
+													colorScheme={subset.get(tag) && 'green'}
+												>
+													{tag}
+												</Code>
+											))}
+										</Text>
+									)
+								)}
 							</Flex>
 						}
 					>

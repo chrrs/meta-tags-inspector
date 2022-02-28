@@ -7,18 +7,14 @@ import { ReactNode, useEffect, useState } from 'react';
 const TWITTER_SUBSET = [
 	'<url>',
 	'twitter:card',
-	'twitter:title',
-	'twitter:description',
-	'twitter:image',
-	'twitter:image:alt',
+	['twitter:title', 'og:title'],
+	['twitter:description', 'og:description'],
+	['twitter:image', 'og:image'],
+	['twitter:image:alt', 'og:image:alt'],
 	'twitter:site',
 	'twitter:player',
 	'twitter:player:width',
 	'twitter:player:height',
-	'og:title',
-	'og:description',
-	'og:image',
-	'og:image:alt',
 ] as const;
 
 const SummaryLargeImageCard: React.VFC<{
