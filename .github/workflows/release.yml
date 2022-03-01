@@ -1,0 +1,33 @@
+name: Release
+
+on:
+    push:
+        tags:
+            - '*'
+
+jobs:
+    release:
+        name: Release ZIP files
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+
+            - name: Install dependencies
+              run: yarn
+
+            - name: Build ZIP files
+              run: yarn release
+
+            - name: Upload ZIP files to latest release
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  repo_token: ${{ secrets.GITHUB_TOKEN }}
+                  file: dist/*/extension-*.zip
+                  tag: ${{ github.ref }}
+                  overwrite: true
+                  file_glob: true

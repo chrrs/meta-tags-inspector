@@ -1,6 +1,6 @@
 {
 	"name": "meta-tags-inspector",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"scripts": {
 		"dev": "rollup -c -w",
 		"build": "rollup -c",
