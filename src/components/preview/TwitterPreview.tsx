@@ -6,7 +6,7 @@ import { ReactNode, useEffect, useState } from 'react';
 
 const TWITTER_SUBSET = [
 	'<url>',
-	'twitter:card',
+	['twitter:card', 'og:type'],
 	['twitter:title', 'og:title'],
 	['twitter:description', 'og:description'],
 	['twitter:image', 'og:image'],
@@ -107,7 +107,15 @@ export const TwitterPreview: React.VFC<{ meta: Meta }> = ({ meta }) => {
 
 		const issues = [] as string[];
 
-		const cardType = subset.get('twitter:card');
+		let cardType = subset.get('twitter:card');
+		if (
+			cardType === undefined &&
+			subset.get('og:type') &&
+			subset.get('og:title') &&
+			subset.get('og:description')
+		) {
+			cardType = 'summary';
+		}
 
 		if (cardType !== undefined) {
 			if (!['summary', 'summary_large_image', 'app', 'player'].includes(cardType)) {
