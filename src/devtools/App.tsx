@@ -1,8 +1,8 @@
+import Header from '$components/Header';
 import DiscordPreview from '$components/preview/DiscordPreview';
 import { TwitterPreview } from '$components/preview/TwitterPreview';
 import { Meta } from '$lib/meta';
-import { RepeatIcon } from '@chakra-ui/icons';
-import { Box, Button, ChakraProvider, Flex, Spinner, Text } from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex, Spinner, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -54,25 +54,7 @@ const App: React.VFC = () => {
 	return (
 		<ChakraProvider>
 			<Flex w="100vw" h="100vh" direction="column" fontSize="sm">
-				<Flex px={4} py={2} gap={2} bg="gray.100" align="center" justify="space-between">
-					<Text>
-						<b>Note: </b>
-						Previews are not always 100% accurate. Make sure to check manually if
-						necessary.
-					</Text>
-
-					<Button
-						flexShrink="0"
-						size="xs"
-						leftIcon={<RepeatIcon />}
-						loadingText="Fetching..."
-						colorScheme="blue"
-						isLoading={fetching}
-						onClick={() => refetch()}
-					>
-						Refetch tags
-					</Button>
-				</Flex>
+				<Header fetching={fetching} onRefetch={() => refetch()} />
 				<Box
 					flex={1}
 					/* TODO: This could cause some things to go offscreen */
