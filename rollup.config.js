@@ -5,6 +5,7 @@ import { defineConfig } from 'rollup';
 import { chromeExtension, simpleReloader } from 'rollup-plugin-chrome-extension';
 import replace from '@rollup/plugin-replace';
 import typescript from '@rollup/plugin-typescript';
+import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import { emptyDir } from 'rollup-plugin-empty-dir';
@@ -38,6 +39,7 @@ const getConfig = (version) =>
 				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			}),
 			typescript(),
+			json(),
 			resolve(),
 			commonjs(),
 			emptyDir(),
