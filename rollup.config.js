@@ -43,7 +43,7 @@ const getConfig = (version) =>
 			resolve(),
 			commonjs(),
 			emptyDir(),
-			!isProduction && serve('dist/v3/devtools'),
+			!isProduction && serve('dist/v3'),
 			isProduction && zip({ file: `extension-${version}.zip` }),
 		],
 	});
