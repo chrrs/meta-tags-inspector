@@ -1,6 +1,8 @@
 {
 	"name": "meta-tags-inspector",
 	"version": "1.0.0",
+	"repository": "github:chrrs/meta-tags-inspector",
+	"license": "BSD-3-Clause",
 	"scripts": {
 		"dev": "rollup -c -w",
 		"build": "rollup -c",
