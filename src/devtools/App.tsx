@@ -8,6 +8,26 @@ import { useState } from 'react';
 
 let port: chrome.runtime.Port | null = null;
 
+function connect() {
+	port = chrome.runtime.connect({
+		name: 'meta-tags-inspector',
+	});
+
+	port.onDisconnect.addListener(() => {
+		if (port != null) {
+			connect();
+		}
+	});
+
+	port.postMessage(['init', { tabId: chrome?.devtools?.inspectedWindow?.tabId }]);
+}
+
+function disconnect() {
+	const p = port;
+	port = null;
+	p?.disconnect();
+}
+
 const App: React.VFC = () => {
 	const [fetching, setFetching] = useState(true);
 	const [error, setError] = useState<string | null>(null);
@@ -21,11 +41,9 @@ const App: React.VFC = () => {
 
 	if (chrome?.runtime) {
 		useEffect(() => {
-			port = chrome.runtime.connect({
-				name: 'meta-tags-inspector',
-			});
+			connect();
 
-			port.onMessage.addListener((message: [string, unknown]) => {
+			const messageListener = (message: [string, unknown]) => {
 				console.log('received', message);
 				if (message[0] === 'fetch:url') {
 					setFetching(true);
@@ -43,11 +61,13 @@ const App: React.VFC = () => {
 					setTags(tags);
 					console.log(tags);
 				}
-			});
+			};
+			port?.onMessage?.addListener(messageListener);
 
-			port.postMessage(['init', { tabId: chrome?.devtools?.inspectedWindow?.tabId }]);
-
-			return () => port?.disconnect();
+			return () => {
+				port?.onMessage.removeListener(messageListener);
+				disconnect();
+			};
 		}, []);
 	}
 
