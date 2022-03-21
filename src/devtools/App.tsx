@@ -9,6 +9,7 @@ import { useState } from 'react';
 let port: chrome.runtime.Port | null = null;
 
 function connect() {
+	chrome.runtime.sendMessage({});
 	port = chrome.runtime.connect({
 		name: 'meta-tags-inspector',
 	});
