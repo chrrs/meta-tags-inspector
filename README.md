@@ -29,7 +29,7 @@ yarn dev
 
 This will do two things:
 
--   Start a development server (running on port `10001` by default), serving the `devtools` folder. Going to `localhost:10001/panel.html` will show the devtools panel in a separate window. You can change the meta tags by temporarily editing the value for `tags` in `App.tsx`.
+-   Start a development server (running on port `10001` by default), serving the `devtools` folder. Going to `localhost:10001/devtools/panel.html` will show the devtools panel in a separate window. You can change the meta tags by temporarily editing the value for `tags` in `App.tsx`.
 -   Build a live-reloading extension for manifest v3 and v2. You can load this in Chrome by going to `chrome://extensions` and in Firefox by going to `about:debugging`. After editing a file, it should automatically reload and after closing and re-opening the devtools panel, the changes should be reflected.
 
 > **Note:** Sometimes the auto-reload function will not work properly, in this case you should manually reload the extension, reload the page and try again.
