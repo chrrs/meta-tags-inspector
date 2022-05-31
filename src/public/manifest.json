@@ -7,7 +7,7 @@
 	"devtools_page": "devtools/index.html",
 	"web_accessible_resources": ["devtools/panel.html"],
 	"permissions": ["tabs"],
-	"background": { "scripts": ["background.js"] },
+	"background": { "scripts": ["background.js"], "persistent": true },
 	"icons": {
 		"16": "icons/favicon-16x16.png",
 		"48": "icons/favicon-48x48.png",
