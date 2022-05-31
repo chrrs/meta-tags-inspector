@@ -119,8 +119,3 @@ chrome.tabs.onUpdated.addListener((tabId, changes, tab) => {
 		tryRefetchTags(tabId, url, port);
 	}
 });
-
-chrome.runtime.onMessage.addListener((_message, _sender, sendResponse) => {
-	// We're only using this message to wake up the service worker.
-	sendResponse({});
-});
