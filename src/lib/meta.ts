@@ -16,17 +16,12 @@ export class Meta {
 		return undefined;
 	}
 
-	subset<
-		S extends readonly (string | readonly string[])[],
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		T = { [K in keyof S]: S[K] extends readonly string[] ? S[K][number] : S[K] }[number]
-	>(subset: S): MetaSubset<S, T> {
+	subset<S extends readonly (string | readonly string[])[]>(subset: S): MetaSubset<S> {
 		return new MetaSubset(this, subset);
 	}
 }
 
-export class MetaSubset<S extends readonly (string | readonly string[])[], T> {
+export class MetaSubset<S extends readonly (string | readonly string[])[], T = FlatArray<S, 1>> {
 	meta: Meta;
 	subset: S;
 
