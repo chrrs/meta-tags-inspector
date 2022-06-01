@@ -23,6 +23,19 @@ const Link = tw.a`text-blue-400 hover:underline cursor-pointer leading-tight`;
 const DiscordPreview: React.VFC<{ meta: Meta }> = ({ meta }) => {
 	const subset = meta.subset(DISCORD_SUBSET);
 
+	const showTitle = subset.get('description', 'twitter:title', 'og:title') !== undefined;
+	const embedType =
+		subset.get('twitter:card') === 'summary_large_image'
+			? subset.get('twitter:image', 'og:image') !== undefined && !showTitle
+				? 'large_image'
+				: 'large_summary'
+			: 'small_summary';
+
+	const showEmbed =
+		showTitle ||
+		embedType === 'large_image' ||
+		subset.get('og:site_name', 'twitter:description', 'og:description');
+
 	return (
 		<Preview subset={subset} title="Discord">
 			<Wrapper>
@@ -31,16 +44,30 @@ const DiscordPreview: React.VFC<{ meta: Meta }> = ({ meta }) => {
 					<Name>
 						Some Person <Timestamp>today at 12:00</Timestamp>
 					</Name>
-					<Link>{subset.get('<url>')}</Link>
-					<Embed
-						type="large_summary"
-						siteName="Stack Overflow"
-						title="Perform .join on value in array of objects"
-						description='If I have an array of strings, I can use the .join() method to get a single string, with each element separated by commas, like so:
-
-                        ["Joe", "Kevin", "Peter"].join(", ") // => "Joe, Kevin, Peter...'
-						imageUrl="https://repository-images.githubusercontent.com/455139649/d45ef0fe-14dd-46b2-af81-a17ad4992548"
-					/>
+					<Link>{subset.get('<url>') ?? '???'}</Link>
+					{showEmbed && (
+						<Embed
+							type={embedType}
+							siteName={subset.get('og:site_name')}
+							title={
+								showTitle
+									? subset.get('twitter:title', 'og:title', '<title>')
+									: undefined
+							}
+							description={subset.get(
+								'twitter:description',
+								'og:description',
+								'description'
+							)}
+							imageUrl={subset.getImage(
+								subset.get('<url>'),
+								'twitter:image',
+								'og:image'
+							)}
+							imageAlt={subset.get('twitter:image:alt', 'og:image:alt')}
+							themeColor={subset.get('theme-color')}
+						/>
+					)}
 				</div>
 			</Wrapper>
 		</Preview>
