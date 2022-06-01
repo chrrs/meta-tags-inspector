@@ -1,10 +1,29 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
 	root: 'src',
-	plugins: [tsconfigPaths({ root: '../' })],
+	plugins: [
+		tsconfigPaths({ root: '../' }),
+		react({
+			babel: {
+				plugins: [
+					'babel-plugin-macros',
+					[
+						'@emotion/babel-plugin-jsx-pragmatic',
+						{
+							export: 'jsx',
+							import: '__cssprop',
+							module: '@emotion/react',
+						},
+					],
+					['@babel/plugin-transform-react-jsx', { pragma: '__cssprop' }, 'twin.macro'],
+				],
+			},
+		}),
+	],
 	build: {
 		polyfillModulePreload: false,
 		outDir: '../dist',
