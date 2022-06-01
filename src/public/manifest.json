@@ -6,7 +6,7 @@
 	"version": "1.0.0",
 	"devtools_page": "devtools/index.html",
 	"web_accessible_resources": ["devtools/panel.html"],
-	"permissions": ["tabs"],
+	"permissions": ["tabs", "<all_urls>"],
 	"background": { "scripts": ["background.js"], "persistent": true },
 	"icons": {
 		"16": "icons/favicon-16x16.png",

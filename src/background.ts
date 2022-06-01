@@ -39,7 +39,7 @@ async function refetchTags(url: string, port: chrome.runtime.Port) {
 	try {
 		// TODO: Fetching here requires the <all_urls> permission.
 		// Is there a better way to do this?
-		const response = await fetch(url);
+		const response = await fetch(url, { mode: 'no-cors' });
 
 		const contentType = response.headers.get('Content-Type');
 		if (!contentType || !contentType?.startsWith('text/html')) {
