@@ -8,7 +8,7 @@ import { Connection } from '$lib/tags';
 import Spinner from '$components/Spinner';
 
 const Wrapper = tw.div`flex flex-col w-full h-full text-sm`;
-const Body = tw.div`flex-grow flex w-full p-4 gap-4 overflow-y-auto`;
+const Body = tw.div`flex-grow flex-col xl:flex-row flex w-full p-4 gap-4 overflow-y-auto`;
 const Column = tw.div`flex-1`;
 const StatusOverlay = tw.div`flex-grow flex flex-col items-center justify-center`;
 const ErrorHeader = tw.h1`text-2xl font-semibold`;
