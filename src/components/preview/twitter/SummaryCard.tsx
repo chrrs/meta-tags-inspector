@@ -1,3 +1,4 @@
+import React from 'react';
 import OptionalText from '$components/OptionalText';
 import tw from 'twin.macro';
 

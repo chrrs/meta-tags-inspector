@@ -1,3 +1,4 @@
+import React from 'react';
 import { Meta } from '$lib/meta';
 import { ReactNode, useEffect, useState } from 'react';
 import tw from 'twin.macro';

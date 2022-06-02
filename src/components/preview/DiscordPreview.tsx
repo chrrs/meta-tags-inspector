@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import { Meta } from '$lib/meta';
 import tw from 'twin.macro';
 import Embed from './discord/Embed';
@@ -23,6 +24,23 @@ const Link = tw.a`text-blue-400 hover:underline cursor-pointer leading-tight`;
 const DiscordPreview: React.VFC<{ meta: Meta }> = ({ meta }) => {
 	const subset = meta.subset(DISCORD_SUBSET);
 
+	const [issues, setIssues] = useState<string[]>([]);
+
+	useEffect(() => {
+		const issues = [] as string[];
+
+		const ogTitle = subset.get('og:title');
+		const ogDescription = subset.get('og:description');
+		const description = subset.get('description');
+		if ((ogTitle && !ogDescription && description) || (!ogTitle && ogDescription)) {
+			issues.push(
+				'OpenGraph tags are mixed with non-OpenGraph tags, which could lead to issues. This is probably caused by a missing og:title or og:description tag.'
+			);
+		}
+
+		setIssues(issues);
+	}, [meta]);
+
 	const showTitle = subset.get('description', 'twitter:title', 'og:title') !== undefined;
 	const embedType =
 		subset.get('twitter:card') === 'summary_large_image'
@@ -37,7 +55,7 @@ const DiscordPreview: React.VFC<{ meta: Meta }> = ({ meta }) => {
 		subset.get('og:site_name', 'twitter:description', 'og:description');
 
 	return (
-		<Preview subset={subset} title="Discord">
+		<Preview subset={subset} title="Discord" issues={issues}>
 			<Wrapper>
 				<Avatar />
 				<div>

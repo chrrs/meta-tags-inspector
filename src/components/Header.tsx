@@ -1,3 +1,4 @@
+import React from 'react';
 import tw, { styled } from 'twin.macro';
 
 const Wrapper = tw.div`px-4 py-2 gap-2 bg-gray-100 bg-opacity-50 backdrop-blur flex items-center justify-between`;

@@ -1,7 +1,7 @@
 import React from 'react';
 import tw, { styled } from 'twin.macro';
 
-import { RiArrowRightSLine, RiInformationLine } from 'react-icons/ri';
+import { RiAlarmWarningLine, RiArrowRightSLine, RiInformationLine } from 'react-icons/ri';
 import { MetaSubset } from '$lib/meta';
 
 import Tippy from '@tippyjs/react';
@@ -67,28 +67,67 @@ const TagsTooltip: React.VFC<{
 	);
 };
 
+const Issue = styled.li({
+	...tw`relative pl-4`,
+	'&:before': tw`content-["-"] absolute left-0`,
+});
+
+const IssuesTooltip: React.VFC<{ issues: string[] }> = (props) => {
+	return (
+		<TooltipWrapper>
+			<TooltipTitle>Potential issues</TooltipTitle>
+			<Divider />
+			<ul>
+				{props.issues.map((issue) => (
+					<Issue>{issue}</Issue>
+				))}
+			</ul>
+		</TooltipWrapper>
+	);
+};
+
 const Header = tw.div`flex justify-between items-center px-4 py-2 bg-gray-100`;
 const Title = tw.div`font-bold`;
+const InfoBar = tw.div`flex gap-8 items-center`;
+const IssuesWarning = tw.p`text-yellow-500`;
+const WarningIcon = tw(RiAlarmWarningLine)`inline-block mr-1 text-lg mb-1`;
 const InfoOutlineIcon = tw(RiInformationLine)`text-lg text-gray-500`;
 
 const Preview: React.FC<{
 	title: string;
 	subset: MetaSubset<readonly (string | readonly string[])[], unknown>;
+	issues?: string[];
 }> = (props) => {
 	return (
 		<div>
 			<Header>
 				<Title>{props.title}</Title>
-				<Tippy
-					content={<TagsTooltip subset={props.subset} />}
-					theme="light"
-					animation="shift-toward-subtle"
-					placement="bottom"
-				>
-					<div>
-						<InfoOutlineIcon />
-					</div>
-				</Tippy>
+				<InfoBar>
+					{props.issues && props.issues?.length > 0 && (
+						<Tippy
+							content={<IssuesTooltip issues={props.issues} />}
+							theme="light"
+							animation="shift-toward-subtle"
+							placement="bottom"
+						>
+							<IssuesWarning>
+								<WarningIcon />
+								{props.issues.length} potential issue
+								{props.issues.length !== 1 ? 's' : ''} found!
+							</IssuesWarning>
+						</Tippy>
+					)}
+					<Tippy
+						content={<TagsTooltip subset={props.subset} />}
+						theme="light"
+						animation="shift-toward-subtle"
+						placement="bottom"
+					>
+						<div>
+							<InfoOutlineIcon />
+						</div>
+					</Tippy>
+				</InfoBar>
 			</Header>
 			{props.children}
 		</div>

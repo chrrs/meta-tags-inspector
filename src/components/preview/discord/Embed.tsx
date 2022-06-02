@@ -1,3 +1,4 @@
+import React from 'react';
 import OptionalLink from '$components/OptionalLink';
 import OptionalText from '$components/OptionalText';
 import tw, { styled } from 'twin.macro';
