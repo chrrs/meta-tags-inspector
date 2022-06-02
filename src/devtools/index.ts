@@ -1,7 +1,5 @@
 chrome.devtools.panels.create(
 	'Meta tags',
-	chrome.devtools.panels.themeName == 'dark'
-		? '/devtools/panel-dark.svg'
-		: '/devtools/panel-light.svg',
+	chrome.devtools.panels.themeName == 'dark' ? '/icons/panel-dark.svg' : '/icons/panel-light.svg',
 	'/devtools/panel.html'
 );
