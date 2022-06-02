@@ -6,6 +6,7 @@ import DiscordPreview from '$components/preview/DiscordPreview';
 import { Meta } from '$lib/meta';
 import { Connection } from '$lib/tags';
 import Spinner from '$components/Spinner';
+import TwitterPreview from '$components/preview/TwitterPreview';
 
 const Wrapper = tw.div`flex flex-col w-full h-full text-sm`;
 const Body = tw.div`flex-grow flex-col xl:flex-row flex w-full p-4 gap-4 overflow-y-auto`;
@@ -43,6 +44,8 @@ const Panel: React.VFC = () => {
 		}
 	}, [connection]);
 
+	const meta = new Meta(tags);
+
 	return (
 		<React.StrictMode>
 			<GlobalStyles />
@@ -51,9 +54,11 @@ const Panel: React.VFC = () => {
 				{!(fetching || error) && (
 					<Body>
 						<Column>
-							<DiscordPreview meta={new Meta(tags)} />
+							<DiscordPreview meta={meta} />
 						</Column>
-						<Column></Column>
+						<Column>
+							<TwitterPreview meta={meta} />
+						</Column>
 					</Body>
 				)}
 				{(fetching || error) && (
