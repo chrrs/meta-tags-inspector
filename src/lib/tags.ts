@@ -27,6 +27,7 @@ export class Connection {
 
 	connect(tabId: number) {
 		this.tabId = tabId;
+		chrome.runtime.sendMessage({});
 		this.port = chrome.runtime.connect({ name: 'meta-tags-inspector' });
 
 		this.port.onDisconnect.removeListener(this.onDisconnect);

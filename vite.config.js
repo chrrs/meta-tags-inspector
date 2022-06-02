@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import react from '@vitejs/plugin-react';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
 	root: 'src',
@@ -23,10 +24,19 @@ export default defineConfig({
 				],
 			},
 		}),
+		viteStaticCopy({
+			targets: [
+				{
+					src: `manifest.${process.env.MANIFEST ?? 'v2'}.json`,
+					dest: '.',
+					rename: 'manifest.json',
+				},
+			],
+		}),
 	],
 	build: {
 		polyfillModulePreload: false,
-		outDir: '../dist',
+		outDir: '../dist/ext',
 		emptyOutDir: true,
 		rollupOptions: {
 			input: {

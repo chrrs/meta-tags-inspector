@@ -6,8 +6,9 @@
 	"scripts": {
 		"dev": "vite build --watch",
 		"build": "vite build",
-		"release": "cross-env NODE_ENV=production vite build && yarn zip",
-		"zip": "cd dist/ && bestzip extension-v2.zip *",
+		"release": "yarn release:v2 && yarn release:v3",
+		"release:v2": "cross-env NODE_ENV=production MANIFEST=v2 vite build && cd dist/ext && bestzip ../extension-v2.zip *",
+		"release:v3": "cross-env NODE_ENV=production MANIFEST=v3 vite build && cd dist/ext && bestzip ../extension-v3.zip *",
 		"format": "prettier --ignore-path .gitignore --write ."
 	},
 	"dependencies": {
@@ -41,6 +42,7 @@
 		"twin.macro": "^2.8.2",
 		"typescript": "^4.5.5",
 		"vite": "^2.9.9",
+		"vite-plugin-static-copy": "^0.5.0",
 		"vite-tsconfig-paths": "^3.5.0"
 	}
 }

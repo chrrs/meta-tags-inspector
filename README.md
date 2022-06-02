@@ -27,7 +27,7 @@ After installing all dependencies using `yarn`, you can start the development se
 yarn dev
 ```
 
-This will do build a live-reloading extension for manifest v3 and v2. You can load this in Chrome by going to `chrome://extensions` and in Firefox by going to `about:debugging`. After editing a file, it should automatically reload and after closing and re-opening the devtools panel, the changes should be reflected.
+This will build a live-reloading extension for manifest v3 (This can be changed by setting the environment variable `MANIFEST=v2`). You can load this in Chrome by going to `chrome://extensions` and in Firefox by going to `about:debugging`. After editing a file, it should automatically reload and after closing and re-opening the devtools panel, the changes should be reflected.
 
 > **Note:** Sometimes the auto-reload function will not work properly, in this case you should manually reload the extension, reload the page and try again.
 
