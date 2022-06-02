@@ -32,7 +32,6 @@ const TwitterPreview: React.VFC<{ meta: Meta }> = ({ meta }) => {
 
 	const [cardType, setCardType] = useState<string | undefined>(undefined);
 
-	// TODO: Display issues
 	const [issues, setIssues] = useState<string[]>([]);
 
 	useEffect(() => {
@@ -140,7 +139,7 @@ const TwitterPreview: React.VFC<{ meta: Meta }> = ({ meta }) => {
 	}
 
 	return (
-		<Preview subset={subset} title="Twitter">
+		<Preview subset={subset} title="Twitter" issues={issues}>
 			<Wrapper>
 				<Author>
 					<Avatar />
