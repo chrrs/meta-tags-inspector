@@ -10,8 +10,9 @@ import TwitterPreview from '$components/preview/TwitterPreview';
 import SearchEnginePreview from '$components/preview/SearchEnginePreview';
 
 const Wrapper = tw.div`flex flex-col w-full h-full text-sm`;
-const Body = tw.div`flex-grow flex-col xl:flex-row flex w-full p-4 gap-4 overflow-y-auto`;
-const Column = tw.div`flex-1`;
+const Container = tw.div`overflow-y-auto`;
+const Body = tw.div`flex-grow flex-col xl:flex-row flex w-full p-4 gap-4`;
+const Column = tw.div`flex-1 flex flex-col gap-4`;
 const StatusOverlay = tw.div`flex-grow flex flex-col items-center justify-center`;
 const ErrorHeader = tw.h1`text-2xl font-semibold`;
 const ErrorSubtitle = tw.h2`mt-1`;
@@ -53,15 +54,17 @@ const Panel: React.VFC = () => {
 			<Wrapper>
 				<Header fetching={fetching} onRefetch={() => connection.refetch()} />
 				{!(fetching || error) && (
-					<Body>
-						<Column>
-							<DiscordPreview meta={meta} />
-							<SearchEnginePreview meta={meta} />
-						</Column>
-						<Column>
-							<TwitterPreview meta={meta} />
-						</Column>
-					</Body>
+					<Container>
+						<Body>
+							<Column>
+								<DiscordPreview meta={meta} />
+								<SearchEnginePreview meta={meta} />
+							</Column>
+							<Column>
+								<TwitterPreview meta={meta} />
+							</Column>
+						</Body>
+					</Container>
 				)}
 				{(fetching || error) && (
 					<StatusOverlay>
