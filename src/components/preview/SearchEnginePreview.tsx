@@ -5,6 +5,7 @@ import Preview from './Preview';
 
 const SEARCH_ENGINE_SUBSET = ['<url>', '<title>', 'description'] as const;
 
+const Base = tw.p`line-clamp-1`;
 const Path = tw.span`text-gray-600`;
 
 const Url: React.VFC<{ url: string }> = (props) => {
@@ -13,10 +14,10 @@ const Url: React.VFC<{ url: string }> = (props) => {
 		const path = url.pathname.substring(1).split('/').join(' \u203A ');
 
 		return (
-			<p>
+			<Base>
 				{url.origin}
 				{path !== '' && <Path> &rsaquo; {path}</Path>}
-			</p>
+			</Base>
 		);
 	} catch (_) {
 		return <p>{props.url}</p>;
@@ -24,8 +25,8 @@ const Url: React.VFC<{ url: string }> = (props) => {
 };
 
 const Wrapper = tw.div`border-t-0 border border-gray-100 p-4`;
-const Title = tw.p`mt-0.5 text-lg text-blue-700 hover:underline cursor-pointer`;
-const Description = tw(OptionalText)`text-gray-800`;
+const Title = tw.p`mt-0.5 text-lg text-blue-700 hover:underline cursor-pointer line-clamp-1`;
+const Description = tw(OptionalText)`text-gray-800 line-clamp-2`;
 const Notice = tw.p`mt-4 px-4 py-2 rounded bg-yellow-100 text-yellow-800`;
 
 const SearchEnginePreview: React.VFC<{ meta: Meta }> = ({ meta }) => {
