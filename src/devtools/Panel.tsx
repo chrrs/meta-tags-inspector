@@ -7,6 +7,7 @@ import { Meta } from '$lib/meta';
 import { Connection } from '$lib/tags';
 import Spinner from '$components/Spinner';
 import TwitterPreview from '$components/preview/TwitterPreview';
+import SearchEnginePreview from '$components/preview/SearchEnginePreview';
 
 const Wrapper = tw.div`flex flex-col w-full h-full text-sm`;
 const Body = tw.div`flex-grow flex-col xl:flex-row flex w-full p-4 gap-4 overflow-y-auto`;
@@ -55,6 +56,7 @@ const Panel: React.VFC = () => {
 					<Body>
 						<Column>
 							<DiscordPreview meta={meta} />
+							<SearchEnginePreview meta={meta} />
 						</Column>
 						<Column>
 							<TwitterPreview meta={meta} />
