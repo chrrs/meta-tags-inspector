@@ -53,12 +53,12 @@ async function refetchTags(url: string, port: chrome.runtime.Port) {
 			'<url>': url,
 		};
 
-		const title = $('title').text();
+		const title = $('html > head > title').text();
 		if (title) {
 			tags['<title>'] = title;
 		}
 
-		for (const tag of $('meta')) {
+		for (const tag of $('html > head > meta')) {
 			const el = $(tag);
 			const key = el.attr('name') ?? el.attr('property') ?? el.attr('itemprop');
 			const value = el.attr('content');
