@@ -53,6 +53,26 @@ async function refetchTags(url: string, port: chrome.runtime.Port) {
 			'<url>': url,
 		};
 
+		for (const tag of $('html > head > link')) {
+			const el = $(tag);
+			const rel = el.attr('rel');
+			if (rel !== 'icon' && rel !== 'shortcut icon') {
+				continue;
+			}
+
+			const href = el.attr('href');
+			if (!href) {
+				continue;
+			}
+
+			tags['<favicon>'] = href;
+			break;
+		}
+
+		if (!tags['<favicon>']) {
+			tags['<favicon>'] = '/favicon.ico';
+		}
+
 		const title = $('html > head > title').text();
 		if (title) {
 			tags['<title>'] = title;
