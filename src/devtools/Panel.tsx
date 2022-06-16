@@ -8,6 +8,7 @@ import { Connection } from '$lib/tags';
 import Spinner from '$components/Spinner';
 import TwitterPreview from '$components/preview/TwitterPreview';
 import SearchEnginePreview from '$components/preview/SearchEnginePreview';
+import SlackPreview from '$components/preview/SlackPreview';
 
 const Wrapper = tw.div`flex flex-col w-full h-full text-sm`;
 const Container = tw.div`overflow-y-auto`;
@@ -62,6 +63,7 @@ const Panel: React.VFC = () => {
 							</Column>
 							<Column>
 								<TwitterPreview meta={meta} />
+								<SlackPreview meta={meta} />
 							</Column>
 						</Body>
 					</Container>
