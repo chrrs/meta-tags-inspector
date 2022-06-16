@@ -78,7 +78,11 @@ const SlackPreview: React.VFC<{ meta: Meta }> = ({ meta }) => {
 								'og:description',
 								'description'
 							)}
-							imageUrl={subset.get('twitter:image', 'og:image')}
+							imageUrl={subset.getImage(
+								subset.get('<url>'),
+								'twitter:image',
+								'og:image'
+							)}
 						/>
 					)}
 				</div>
